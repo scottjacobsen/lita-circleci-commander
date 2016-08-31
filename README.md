@@ -15,10 +15,10 @@ gem "lita-circleci-commander"
 You must set the following environement variables that correspond to
 the values expected by the CircleCi API:
 
-    * `CIRCLECI_VCS_TYPE`
-    * `CIRCLECI_USERNAME`
-    * `CIRCLECI_PROJECT`
-    * `CIRCLECI_TOKEN`
+* `CIRCLECI_VCS_TYPE`
+* `CIRCLECI_USERNAME`
+* `CIRCLECI_PROJECT`
+* `CIRCLECI_TOKEN`
 
 ## Usage
 
