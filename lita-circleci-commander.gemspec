@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-circleci-commander"
-  spec.version       = "0.1.0"
+  spec.version       = "0.1.1"
   spec.authors       = ["Scott Jacobsen"]
   spec.email         = ["jacobsenscott@yahoo.com"]
   spec.description   = "Use CircleCi's API from chat"
