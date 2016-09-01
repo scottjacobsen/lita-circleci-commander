@@ -6,12 +6,12 @@ module Lita
       attr_writer :circle
 
       # insert handler code here
-      route /^rebuild \#/, :rebuild, command: true, help: { "rebuild" => "Rebuild the last failed build."}
+      route /^rebuild/, :rebuild, command: true, help: { "rebuild 1234" => "Retry the specified build."}
 
       def rebuild(response)
         build_id = response.message.body.split.last
-        response.reply "#{response.user.name} is rebuilding #{build_id}."
-        circle.rebuild(build_id.delete("#").to_i) || response.reply("Error talking to CircleCi :(")
+        response.reply "#{response.user.name} is rebuilding ##{build_id}."
+        circle.rebuild(build_id.to_i) || response.reply("Error talking to CircleCi :(")
       end
 
       def circle

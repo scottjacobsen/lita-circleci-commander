@@ -2,10 +2,10 @@ require "spec_helper"
 
 describe Lita::Handlers::CircleciCommander, lita_handler: true do
   context "rebuild" do
-    it { is_expected.to route("#{robot.mention_name}: rebuild #123").to :rebuild }
+    it { is_expected.to route("#{robot.mention_name}: rebuild 123").to :rebuild }
 
     let(:rebuild_message) {
-      instance_double("Lita::Message", "message", body: "rebuild #123")
+      instance_double("Lita::Message", "message", body: "rebuild 123")
     }
 
     let(:response) { instance_double("Lita::Response", "response", user: user, message: rebuild_message) }
