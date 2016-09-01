@@ -1,6 +1,6 @@
 # lita-circleci-commander
 
-TODO: Add a description of the plugin.
+This Lita plugin allows you to retry a faild build directly from chat.
 
 ## Installation
 
