@@ -1,3 +1,5 @@
+![circle](https://circleci.com/gh/scottjacobsen/lita-circleci-commander.svg?style=shield)
+
 # lita-circleci-commander
 
 This Lita plugin allows you to retry a faild build directly from chat.
