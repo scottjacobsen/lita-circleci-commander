@@ -11,17 +11,25 @@ describe Lita::Handlers::CircleciCommander, lita_handler: true do
     let(:response) { instance_double("Lita::Response", "response", user: user, message: rebuild_message) }
 
     it "tells who is rebuilding" do
-      subject.circle = spy("circleci")
+      subject.circle = instance_double("Lita::Handlers::CircleciCommander::CircleCi", "circleci", rebuild: true)
       expect(response).to receive(:reply).with("#{user.name} is rebuilding #123.")
 
       subject.rebuild(response)
     end
 
     it "posts rebuild to circle ci" do
+      allow(response).to receive(:reply)
       circleci = instance_double("Lita::Handlers::CircleciCommander::CircleCi", "circleci", rebuild: true)
       subject.circle = circleci
       expect(circleci).to receive(:rebuild).with 123
-      expect(response).to receive(:reply)
+
+      subject.rebuild(response)
+    end
+
+    it "tells about errors calling the circle api" do
+      subject.circle = instance_double("Lita::Handlers::CircleciCommander::CircleCi", "circleci", rebuild: false)
+      allow(response).to receive(:reply).with("#{user.name} is rebuilding #123.")
+      expect(response).to receive(:reply).with("Error talking to CircleCi :(")
 
       subject.rebuild(response)
     end
