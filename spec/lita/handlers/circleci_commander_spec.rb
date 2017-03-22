@@ -28,7 +28,7 @@ RSpec.describe Lita::Handlers::CircleciCommander, lita_handler: true do
 
     it "tells about errors calling the circle api" do
       subject.ci_server = instance_double(Lita::Handlers::CircleciCommander::CircleCi, "circleci",
-                                       rebuild: false)
+                                       rebuild: false, name: "CircleCi")
       allow(response).to receive(:reply).with("#{user.name} is rebuilding #123.")
       expect(response).to receive(:reply).with("Error talking to CircleCi :(")
 
