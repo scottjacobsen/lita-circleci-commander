@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Lita::Handlers::CircleciCommander, lita_handler: true do
+RSpec.describe Lita::Handlers::CircleciCommander, lita_handler: true do
   context "rebuild" do
     it { is_expected.to route("#{robot.mention_name}: rebuild 123").to :rebuild }
 
