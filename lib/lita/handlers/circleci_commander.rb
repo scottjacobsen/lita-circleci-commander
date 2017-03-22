@@ -3,7 +3,7 @@ require "net/http"
 module Lita
   module Handlers
     class CircleciCommander < Handler
-      attr_writer :circle
+      attr_writer :ci_server
 
       # insert handler code here
       route /^rebuild/, :rebuild, command: true, help: { "rebuild 1234" => "Retry the specified build."}
@@ -11,11 +11,11 @@ module Lita
       def rebuild(response)
         build_id = response.message.body.split.last
         response.reply "#{response.user.name} is rebuilding ##{build_id}."
-        circle.rebuild(build_id.to_i) || response.reply("Error talking to CircleCi :(")
+        ci_server.rebuild(build_id.to_i) || response.reply("Error talking to CircleCi :(")
       end
 
-      def circle
-        @circle ||= CircleCi.new
+      def ci_server
+        @ci_server ||= CircleCi.new
       end
 
       Lita.register_handler(self)
