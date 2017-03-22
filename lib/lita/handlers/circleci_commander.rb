@@ -6,7 +6,7 @@ module Lita
       attr_writer :ci_server
 
       # insert handler code here
-      route /^rebuild/, :rebuild, command: true, help: { "rebuild 1234" => "Retry the specified build."}
+      route(/^rebuild/, :rebuild, command: true, help: { "rebuild 1234" => "Retry the specified build." })
 
       def rebuild(response)
         build_id = response.message.body.split.last
@@ -21,7 +21,7 @@ module Lita
       Lita.register_handler(self)
 
       class CircleCi
-        def rebuild id
+        def rebuild(id)
           uri = URI("https://circleci.com/api/v1.1/project/#{vcs}/#{username}/#{project}/#{id}/retry?circle-token=#{token}")
           Net::HTTP.post_form(uri, {}).is_a?(Net::HTTPSuccess)
         end
