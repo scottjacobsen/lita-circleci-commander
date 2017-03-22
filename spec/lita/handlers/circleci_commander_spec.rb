@@ -22,7 +22,7 @@ RSpec.describe Lita::Handlers::CircleciCommander, lita_handler: true do
       allow(response).to receive(:reply)
       circleci = instance_double(Lita::Handlers::CircleciCommander::CircleCi, "circleci", rebuild: true)
       subject.ci_server = circleci
-      expect(circleci).to receive(:rebuild).with 123
+      expect(circleci).to receive(:rebuild).with "123"
 
       subject.rebuild(response)
     end

@@ -11,7 +11,7 @@ module Lita
       def rebuild(response)
         build_id = response.message.body.split.last
         response.reply "#{response.user.name} is rebuilding ##{build_id}."
-        ci_server.rebuild(build_id.to_i) || response.reply("Error talking to #{ci_server.name} :(")
+        ci_server.rebuild(build_id) || response.reply("Error talking to #{ci_server.name} :(")
       end
 
       def ci_server
@@ -22,7 +22,8 @@ module Lita
 
       class CircleCi
         def rebuild(id)
-          uri = URI("https://circleci.com/api/v1.1/project/#{vcs}/#{username}/#{project}/#{id}/retry?circle-token=#{token}")
+          uri = URI("https://circleci.com/api/v1.1/project/#{vcs}/#{username}/#{project}/#{id.to_i}/"\
+                    "retry?circle-token=#{token}")
           Net::HTTP.post_form(uri, {}).is_a?(Net::HTTPSuccess)
         end
 
